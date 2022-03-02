@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema({
     },
     birthday: {
         type: Date
+    },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 }, { timestamps: true });
 
