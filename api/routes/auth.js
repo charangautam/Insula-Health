@@ -6,17 +6,17 @@ const router = express.Router();
 
 router.post('/register', async (req, res) => {
     try {
-        const checkUsername = await User.findOne({ username: req.body.username })
-        if (checkUsername) {
-            res.status(409).json('user with this username already exists')
+        const checkUser = await User.findOne({ username: req.body.username })
+
+        if (checkUser) {
+            res.status(200).json("User already exists")
             return
         }
 
-        // hash password
-        req.body.password = bcrypt.hash(req.body.password, 10)
+        req.body.password = await bcrypt.hash(req.body.password, 10)
 
         const newUser = new User(req.body)
-        const user = newUser.save()
+        const user = await newUser.save()
 
         res.status(200).json(user)
     } catch (error) {
@@ -24,8 +24,25 @@ router.post('/register', async (req, res) => {
     }
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.body.username })
+        if (!user) {
+            res.status(400).json('An user with this username does not exist')
+            return
+        }
 
+        const validPassword = await bcrypt.compare(req.body.password, user.password)
+        if (!validPassword) {
+            res.status(400).json('Incorrect password entered')
+            return
+        }
+
+        const { password, ...others } = user._doc
+        res.status(200).json(others)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 })
 
 export default router;
