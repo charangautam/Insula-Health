@@ -1,10 +1,12 @@
-import express, { application } from 'express';
+import express from 'express';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+// initialize router
 const authRouter = express.Router();
 
+// register user
 authRouter.post('/register', async (req, res) => {
     try {
         const checkUser = await User.findOne({ username: req.body.username })
@@ -25,6 +27,7 @@ authRouter.post('/register', async (req, res) => {
     }
 })
 
+// login user
 authRouter.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username })
@@ -39,11 +42,13 @@ authRouter.post('/login', async (req, res) => {
             return
         }
 
+        // create JWT token
         const accessToken = jwt.sign(
             { id: user._id, isAdmin: user.isAdmin },
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '3d' }
         )
+        // send JWT token with user info
         res.status(200).json({
             _id: user._id,
             username: user.username,
@@ -57,6 +62,7 @@ authRouter.post('/login', async (req, res) => {
     }
 })
 
+// verify token function for user actions
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization
     if (authHeader) {
@@ -75,6 +81,7 @@ const verifyToken = (req, res, next) => {
     }
 }
 
+// delete user if token is verified
 authRouter.delete('/:userId', verifyToken, async (req, res) => {
     try {
         if (req.user.id === req.params.userId || req.user.isAdmin) {
@@ -84,8 +91,10 @@ authRouter.delete('/:userId', verifyToken, async (req, res) => {
             res.status(403).json('You cannot delete this user')
         }
     } catch (error) {
-
+        res.status(500).json(error)
     }
 })
+
+
 
 export default authRouter;
