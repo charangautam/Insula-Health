@@ -130,4 +130,34 @@ authRouter.put('/:userId', verifyToken, async (req, res) => {
     }
 })
 
+// get a user 
+authRouter.get('/:userId', verifyToken, async (req, res) => {
+    try {
+        // check if correct user is trying to reach account
+        if (req.user.id === req.params.userId || req.user.isAdmin) {
+            const user = await User.findById(req.params.userId)
+            res.status(200).json(user)
+        } else {
+            res.status(403).json('You cannot get this user')
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+// get all users [admin feature]
+authRouter.get('/users', verifyToken, async (req, res) => {
+    try {
+        // check if user is admin & send all users
+        if (req.user.isAdmin) {
+            const users = await User.find()
+            res.status(200).json(users)
+        } else {
+            res.status(403).json('You do not have access to this feature')
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
 export default authRouter;
