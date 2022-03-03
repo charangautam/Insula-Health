@@ -3,9 +3,9 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const router = express.Router();
+const authRouter = express.Router();
 
-router.post('/register', async (req, res) => {
+authRouter.post('/register', async (req, res) => {
     try {
         const checkUser = await User.findOne({ username: req.body.username })
 
@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
     }
 })
 
-router.post('/login', async (req, res) => {
+authRouter.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username })
         if (!user) {
@@ -71,4 +71,17 @@ const verifyToken = (req, res, next) => {
     }
 }
 
-export default router;
+authRouter.delete('/:userId', verifyToken, async (req, res) => {
+    try {
+        if (req.user.id === req.params.userId || req.user.isAdmin) {
+            await User.findByIdAndDelete(req.params.userId)
+            res.status(200).json("Sucessfully deleted user")
+        } else {
+            res.status(403).json('You cannot delete this user')
+        }
+    } catch (error) {
+
+    }
+})
+
+export default authRouter;
