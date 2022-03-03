@@ -1,6 +1,7 @@
-import express from 'express';
+import express, { application } from 'express';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -38,11 +39,36 @@ router.post('/login', async (req, res) => {
             return
         }
 
-        const { password, ...others } = user._doc
-        res.status(200).json(others)
+        const accessToken = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.ACCESS_TOKEN_SECRET)
+        res.status(200).json({
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            createdAt: user.createdAt,
+            accessToken
+        })
     } catch (error) {
         res.status(500).json(error)
     }
 })
+
+const verifyToken = (req, res, next) => {
+    const authHeader = req.headers.authorization
+    if (authHeader) {
+        const token = authHeader.split(' ')[1]
+
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+            if (err) {
+                res.status(403).json('Token is not valid')
+            }
+
+            req.user = user
+            next()
+        })
+    } else {
+        res.status(401).json('You are not authenticated')
+    }
+}
 
 export default router;
