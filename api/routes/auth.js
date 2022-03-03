@@ -1,4 +1,4 @@
-import express, { json } from 'express';
+import express from 'express';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -11,7 +11,6 @@ authRouter.post('/register', async (req, res) => {
     try {
         // check if user with username already exists
         const checkUser = await User.findOne({ username: req.body.username })
-
         if (checkUser) {
             res.status(200).json("Username already exists")
             return
@@ -53,7 +52,7 @@ authRouter.post('/login', async (req, res) => {
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '3d' }
         )
-        // send JWT token with user info
+        // send JWT token with necessary user info
         res.status(200).json({
             _id: user._id,
             username: user.username,
@@ -71,8 +70,8 @@ authRouter.post('/login', async (req, res) => {
 const verifyToken = (req, res, next) => {
     // check if there is token
     const authHeader = req.headers.authorization
-    // get the token
     if (authHeader) {
+        // get the token
         const token = authHeader.split(' ')[1]
 
         // check if the token is correct
@@ -160,4 +159,5 @@ authRouter.get('/users', verifyToken, async (req, res) => {
     }
 })
 
+// export auth routes
 export default authRouter;

@@ -6,14 +6,16 @@ import cors from 'cors';
 // routes
 import authRouter from './routes/auth.js'
 
+// initialize app
 const app = express();
 config();
 
+// connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-    .then(console.log('Connected to MongoDB'))
+    .then(console.log('connected to MongoDB'))
     .catch(err => console.log(err));
 
 // middleware
@@ -22,6 +24,7 @@ app.use(express.json());
 // use routes
 app.use('/api/auth', authRouter)
 
+// connect to server
 app.listen(6000, () => {
     console.log('server is running')
 });
