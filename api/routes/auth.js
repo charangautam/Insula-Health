@@ -39,7 +39,11 @@ authRouter.post('/login', async (req, res) => {
             return
         }
 
-        const accessToken = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.ACCESS_TOKEN_SECRET)
+        const accessToken = jwt.sign(
+            { id: user._id, isAdmin: user.isAdmin },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '3d' }
+        )
         res.status(200).json({
             _id: user._id,
             username: user.username,
