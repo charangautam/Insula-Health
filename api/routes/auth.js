@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json } from 'express';
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -9,15 +9,18 @@ const authRouter = express.Router();
 // register user
 authRouter.post('/register', async (req, res) => {
     try {
+        // check if user with username already exists
         const checkUser = await User.findOne({ username: req.body.username })
 
         if (checkUser) {
-            res.status(200).json("User already exists")
+            res.status(200).json("Username already exists")
             return
         }
 
+        // hash password before storing on DB
         req.body.password = await bcrypt.hash(req.body.password, 10)
 
+        // create & store new user in DB
         const newUser = new User(req.body)
         const user = await newUser.save()
 
@@ -30,12 +33,14 @@ authRouter.post('/register', async (req, res) => {
 // login user
 authRouter.post('/login', async (req, res) => {
     try {
+        // check if incorrect username entered
         const user = await User.findOne({ username: req.body.username })
         if (!user) {
             res.status(400).json('An user with this username does not exist')
             return
         }
 
+        // check if password matches hashed password on DB
         const validPassword = await bcrypt.compare(req.body.password, user.password)
         if (!validPassword) {
             res.status(400).json('Incorrect password entered')
@@ -64,10 +69,13 @@ authRouter.post('/login', async (req, res) => {
 
 // verify token function for user actions
 const verifyToken = (req, res, next) => {
+    // check if there is token
     const authHeader = req.headers.authorization
+    // get the token
     if (authHeader) {
         const token = authHeader.split(' ')[1]
 
+        // check if the token is correct
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
                 res.status(403).json('Token is not valid')
@@ -84,6 +92,7 @@ const verifyToken = (req, res, next) => {
 // delete user if token is verified
 authRouter.delete('/:userId', verifyToken, async (req, res) => {
     try {
+        // check if correct user is trying to delete account
         if (req.user.id === req.params.userId || req.user.isAdmin) {
             await User.findByIdAndDelete(req.params.userId)
             res.status(200).json("Sucessfully deleted user")
@@ -95,6 +104,30 @@ authRouter.delete('/:userId', verifyToken, async (req, res) => {
     }
 })
 
+// edit user details if token is verified
+authRouter.put('/:userId', verifyToken, async (req, res) => {
+    try {
+        // check if correct user is trying to edit account
+        if (req.user.id === req.params.userId || req.user.isAdmin) {
+            // check if new password is entered to hash or not
+            const checkUser = await User.findById(req.params.userId)
+            if (checkUser.password !== req.body.password) {
+                req.body.password = await bcrypt.hash(req.body.password, 10)
+            }
 
+            // update all fields
+            const user = await User.findByIdAndUpdate(
+                req.params.userId,
+                { $set: req.body },
+                { new: true }
+            )
+            res.status(200).json(user)
+        } else {
+            res.status(403).json('You cannot update this user')
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 export default authRouter;
