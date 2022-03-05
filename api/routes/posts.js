@@ -46,4 +46,20 @@ postsRouter.put('/:postId', verifyToken, async (req, res) => {
     }
 })
 
+// delete a post [admin feature]
+postsRouter.delete('/:postId', verifyToken, async (req, res) => {
+    try {
+        // check if admin user is trying to delete account
+        if (req.user.isAdmin) {
+            await Post.findByIdAndDelete(req.params.postId)
+            res.status(200).json('Successfully deleted post')
+        } else {
+            res.status(403).json('You cannot delete posts')
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+
 export default postsRouter;
