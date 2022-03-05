@@ -18,7 +18,28 @@ postsRouter.post('/', verifyToken, async (req, res) => {
 
             res.status(200).json(post)
         } else {
-            res.status(403).json('You cannot create a post')
+            res.status(403).json('You cannot create posts')
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+// edit a post [admin feature]
+postsRouter.put('/:postId', verifyToken, async (req, res) => {
+    try {
+        // check if admin user is trying to edit account
+        if (req.user.isAdmin) {
+            // update all fields
+            const post = await Post.findByIdAndUpdate(
+                req.params.postId,
+                { $set: req.body },
+                { new: true }
+            )
+
+            res.status(200).json(post)
+        } else {
+            res.status(403).json('You cannot edit posts')
         }
     } catch (error) {
         res.status(500).json(error)
