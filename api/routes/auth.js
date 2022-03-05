@@ -67,7 +67,7 @@ authRouter.post('/login', async (req, res) => {
 })
 
 // verify token function for user actions
-const verifyToken = (req, res, next) => {
+export const verifyToken = (req, res, next) => {
     // check if there is token
     const authHeader = req.headers.authorization
     if (authHeader) {
