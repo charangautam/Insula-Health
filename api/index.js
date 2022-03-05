@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 // routes
-import authRouter from './routes/auth.js'
+import authRouter from './routes/auth.js';
+import postsRouter from './routes/posts.js';
 
 // initialize app
 const app = express();
@@ -22,7 +23,8 @@ mongoose.connect(process.env.MONGO_URL, {
 app.use(cors());
 app.use(express.json());
 // use routes
-app.use('/api/auth', authRouter)
+app.use('/api/auth', authRouter);
+app.use('/api/posts', postsRouter);
 
 // connect to server
 app.listen(6000, () => {
