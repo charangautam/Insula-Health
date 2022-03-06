@@ -1,6 +1,5 @@
 import express from 'express';
 import Post from '../models/Post.js';
-import User from '../models/User.js';
 
 // verify jwt token for user actions
 import { verifyToken } from './auth.js';
@@ -21,6 +20,7 @@ postsRouter.post('/', verifyToken, async (req, res) => {
             res.status(403).json('You cannot create posts')
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -41,6 +41,7 @@ postsRouter.put('/:postId', verifyToken, async (req, res) => {
             res.status(403).json('You cannot edit posts')
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -56,6 +57,7 @@ postsRouter.delete('/:postId', verifyToken, async (req, res) => {
             res.status(403).json('You cannot delete posts')
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -66,6 +68,7 @@ postsRouter.get('/', verifyToken, async (req, res) => {
         const posts = await Post.find()
         res.status(200).json(posts)
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -81,6 +84,7 @@ postsRouter.post('/like/:postId', verifyToken, async (req, res) => {
         )
         res.status(200).json(post)
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -95,6 +99,7 @@ postsRouter.delete('/unlike/:postId', verifyToken, async (req, res) => {
         )
         res.status(200).json(post)
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
