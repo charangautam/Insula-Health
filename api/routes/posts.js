@@ -36,7 +36,6 @@ postsRouter.put('/:postId', verifyToken, async (req, res) => {
                 { $set: req.body },
                 { new: true }
             )
-
             res.status(200).json(post)
         } else {
             res.status(403).json('You cannot edit posts')
@@ -71,5 +70,19 @@ postsRouter.get('/', verifyToken, async (req, res) => {
     }
 })
 
+// add user likes to a post
+postsRouter.post('/like/:postId', verifyToken, async (req, res) => {
+    try {
+        // find post and add userId to likes array
+        const post = await Post.findByIdAndUpdate(
+            req.params.postId,
+            { $addToSet: { likes: req.user.id } },
+            { new: true }
+        )
+        res.status(200).json(post)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 export default postsRouter;
