@@ -25,6 +25,7 @@ authRouter.post('/register', async (req, res) => {
 
         res.status(200).json(user)
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -62,6 +63,7 @@ authRouter.post('/login', async (req, res) => {
             accessToken
         })
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -84,6 +86,7 @@ export const verifyToken = (req, res, next) => {
             next()
         })
     } else {
+        console.log(error)
         res.status(401).json('You are not authenticated')
     }
 }
@@ -99,6 +102,7 @@ authRouter.delete('/:userId', verifyToken, async (req, res) => {
             res.status(403).json('You cannot delete this user')
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -125,6 +129,7 @@ authRouter.put('/:userId', verifyToken, async (req, res) => {
             res.status(403).json('You cannot update this user')
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -140,6 +145,7 @@ authRouter.get('/:userId', verifyToken, async (req, res) => {
             res.status(403).json('You cannot get this user')
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
@@ -155,6 +161,7 @@ authRouter.get('/users', verifyToken, async (req, res) => {
             res.status(403).json('You do not have access to this feature')
         }
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
 })
