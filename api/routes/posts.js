@@ -85,4 +85,18 @@ postsRouter.post('/like/:postId', verifyToken, async (req, res) => {
     }
 })
 
+postsRouter.delete('/unlike/:postId', verifyToken, async (req, res) => {
+    try {
+        // find post and pull userId from likes array
+        const post = await Post.findByIdAndUpdate(
+            req.params.postId,
+            { $pull: { likes: req.user.id } },
+            { new: true }
+        )
+        res.status(200).json(post)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
 export default postsRouter;
