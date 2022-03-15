@@ -3,6 +3,7 @@ import './home.css'
 // images
 import introImg from '../../images/intro.png'
 import mentalWellness from '../../images/mental.jpg'
+import physicalFitness from '../../images/physical1.jpg'
 // react-bootstrap components
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 
@@ -14,9 +15,9 @@ function Home() {
       text: "Mental wellness comes from feeling balanced, connected to others and ready to meet life's challenges. Mental wellness goes hand-in-hand with physical health."
     },
     {
-      img: 'https://via.placeholder.com/150',
+      img: physicalFitness,
       title: 'Physical Fitness',
-      text: 'Improve and develop your mental strength through science proven methods. Increase your level of ividual resilience and confidence.'
+      text: 'Physical fitness is a state of health and well-being and, more specifically, the ability to perform aspects of sports, occupations and daily activities.'
     },
     {
       img: 'https://via.placeholder.com/150',
