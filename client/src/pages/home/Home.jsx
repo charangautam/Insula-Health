@@ -2,27 +2,29 @@ import React from 'react'
 import './home.css'
 // images
 import introImg from '../../images/intro.png'
-import mentalWellness from '../../images/mental.jpg'
-import physicalFitness from '../../images/physical1.jpg'
+import mental from '../../images/mental.jpg'
+import physical from '../../images/physical.jpg'
+import social from '../../images/social.png'
+
 // react-bootstrap components
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 
 function Home() {
   const products = [
     {
-      img: mentalWellness,
-      title: 'Mental Wellness',
+      img: mental,
+      title: 'Mental',
       text: "Mental wellness comes from feeling balanced, connected to others and ready to meet life's challenges. Mental wellness goes hand-in-hand with physical health."
     },
     {
-      img: physicalFitness,
-      title: 'Physical Fitness',
+      img: physical,
+      title: 'Physical',
       text: 'Physical fitness is a state of health and well-being and, more specifically, the ability to perform aspects of sports, occupations and daily activities.'
     },
     {
-      img: 'https://via.placeholder.com/150',
-      title: 'Mental Fortite',
-      text: 'Improve and develop your mental strength through science proven methods. Increase your level of ividual resilience and confidence.'
+      img: social,
+      title: 'Social',
+      text: 'Social health can be defined as our ability to interact and form meaningful relationships with others. Social relationships have an impact on our mental health and physical health.'
     }
   ]
 
@@ -36,7 +38,7 @@ function Home() {
         <img src={introImg} alt="Introduction" />
       </div>
       <div className='home-products'>
-        <h2>Recent Posts</h2>
+        <h2>Wellness Products</h2>
         <Container fluid className='products'>
           <Row>
             {
