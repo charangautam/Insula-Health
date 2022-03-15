@@ -66,7 +66,7 @@ function Home() {
         <h2>About Me</h2>
         <div className='about'>
           <img src={me} alt="About me" />
-          <p></p>
+          <p>I am a full stack web developer with an undergrad in Kinesiology. I pursued Kinesiology for my bachelor’s degree because of an innate drive to empower others to experience the physical, social, and mental wellness benefits associated with healthy living. When I started programming because I was very invested in exploring how technology enables and progresses healthcare. My purpose is to utilize my knowledge on important topics such as health, wellness, and performance psychology to write software that strives to make a difference and improve the lives of users. I personally utilize all the resources shared on Insula Health.</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Fira Sans', sans-serif;
+  color: #000000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #CEE5D0;
