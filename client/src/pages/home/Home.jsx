@@ -24,7 +24,7 @@ function Home() {
     {
       img: social,
       title: 'Social',
-      text: 'Social health can be defined as our ability to interact and form meaningful relationships with others. Social relationships have an impact on our mental health and physical health.'
+      text: 'Social health can be defined as our ability to interact and form meaningful relationships with others. Social relationships have an impact on our mental and physical health.'
     }
   ]
 
@@ -38,14 +38,14 @@ function Home() {
         <img src={introImg} alt="Introduction" />
       </div>
       <div className='home-products'>
-        <h2>Wellness Products</h2>
+        <h2 className="m-5">Wellness Products</h2>
         <Container fluid className='products'>
           <Row>
             {
               products.map(p => {
                 return <Col key={p.title}>
                   <Card>
-                    <Card.Img variant="top" src={p.img} />
+                    <Card.Img variant="top" src={p.img} style={{ height: "250px" }} />
                     <Card.Body>
                       <Card.Title>{p.title}</Card.Title>
                       <Card.Text>{p.text}</Card.Text>
