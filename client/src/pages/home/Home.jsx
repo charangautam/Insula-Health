@@ -5,7 +5,7 @@ import introImg from '../../images/intro.png'
 import mental from '../../images/mental.jpg'
 import physical from '../../images/physical.jpg'
 import social from '../../images/social.png'
-
+import me from '../../images/profile.jpg'
 // react-bootstrap components
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 
@@ -61,6 +61,13 @@ function Home() {
             </Button>
           </div>
         </Container>
+      </div>
+      <div className='home-about'>
+        <h2>About Me</h2>
+        <div className='about'>
+          <img src={me} alt="About me" />
+          <p></p>
+        </div>
       </div>
     </div>
   )
