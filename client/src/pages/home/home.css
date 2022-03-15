@@ -21,7 +21,7 @@
 
 .intro h1 {
     font-family: 'Kanit', sans-serif;
-    font-weight: 00;
+    font-weight: 500;
     font-size: 63px;
 }
 
@@ -29,3 +29,20 @@
     font-weight: 700;
 }
 
+/* 3 wellness pillars*/ 
+
+.home-pillars h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 50px;
+    margin: 60px;
+}
+
+.pillars-title {
+    font-family: 'Kanit', sans-serif;
+    font-size: 30px;
+}
+
+.pillars-text {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 17px;
+}

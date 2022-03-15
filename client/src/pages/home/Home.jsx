@@ -10,16 +10,16 @@ import social from '../../images/social.png'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 
 function Home() {
-  const products = [
+  const pillars = [
     {
       img: mental,
       title: 'Mental',
-      text: "Mental wellness comes from feeling balanced, connected to others and ready to meet life's challenges. Mental wellness goes hand-in-hand with physical health."
+      text: "Mental wellness comes from feeling balanced, connected to others and ready to meet life's challenges. Mental wellness goes hand-in-hand with your physical health and social relationships."
     },
     {
       img: physical,
       title: 'Physical',
-      text: 'Physical fitness is a state of health and well-being and, more specifically, the ability to perform aspects of sports, occupations and daily activities.'
+      text: 'Physical fitness is a state of health and well-being as well as the ability to perform aspects of sports, occupations and daily activities. Physical wellness is directly influenced by your mental and social health.'
     },
     {
       img: social,
@@ -37,25 +37,29 @@ function Home() {
         </div>
         <img src={introImg} alt="Introduction" />
       </div>
-      <div className='home-products'>
-        <h2 className="m-5">Wellness Products</h2>
-        <Container fluid className='products'>
+      <div className='home-pillars'>
+        <h2>3 Wellness Pillars</h2>
+        <Container fluid className='pillars'>
           <Row>
             {
-              products.map(p => {
+              pillars.map(p => {
                 return <Col key={p.title}>
-                  <Card>
+                  <Card style={{ height: "450px" }}>
                     <Card.Img variant="top" src={p.img} style={{ height: "250px" }} />
                     <Card.Body>
-                      <Card.Title>{p.title}</Card.Title>
-                      <Card.Text>{p.text}</Card.Text>
-                      <Button variant="primary">Go to posts</Button>
+                      <Card.Title className="pillars-title">{p.title}</Card.Title>
+                      <Card.Text className="pillars-text">{p.text}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
               })
             }
           </Row>
+          <div className="d-grid gap-2">
+            <Button variant="primary" size="lg" className="m-5">
+              Go to posts
+            </Button>
+          </div>
         </Container>
       </div>
     </div>
