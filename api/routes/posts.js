@@ -63,7 +63,7 @@ postsRouter.delete('/:postId', verifyToken, async (req, res) => {
 })
 
 // get all posts
-postsRouter.get('/', verifyToken, async (req, res) => {
+postsRouter.get('/', async (req, res) => {
     try {
         const posts = await Post.find()
         res.status(200).json(posts)
