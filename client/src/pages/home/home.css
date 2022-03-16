@@ -64,5 +64,7 @@ h2 {
 
 .about p {
     width: 50%;
-    font-size: 17px;
+    font-size: 19px;
+    line-height: 1.6;
+    text-align: justify;
 }
