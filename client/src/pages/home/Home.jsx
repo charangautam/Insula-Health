@@ -33,7 +33,7 @@ function Home() {
       <div className='home-intro'>
         <div className="intro">
           <h1>Welcome to <span className='text-primary'>Insula Health</span></h1>
-          <p className='w-75 m-4 lead'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque asperiores ab temporibus natus earum error, deserunt suscipit aperiam illum mollitia eos quisquam facilis soluta nemo saepe, ipsam, minima quos. Dolorem!</p>
+          <p className='w-75 m-4 lead'>Insula Health serves as a personal sanctuary where the emphasis is on improving your wellbeing and health. Created by a certified Kinesiology, we compose resources, backed by science, proven to improve your wellness across the health triangle – Mental, Physical and Social spheres.</p>
         </div>
         <img src={introImg} alt="Introduction" />
       </div>
