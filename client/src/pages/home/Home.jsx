@@ -44,25 +44,21 @@ function Home() {
             {
               pillars.map(p => {
                 return <Col key={p.title}>
-                  <Card style={{ height: "450px" }}>
+                  <Card>
                     <Card.Img variant="top" src={p.img} style={{ height: "250px" }} />
                     <Card.Body>
                       <Card.Title className="pillars-title">{p.title}</Card.Title>
                       <Card.Text className="pillars-text">{p.text}</Card.Text>
+                      <Button href="#">Go to {p.title} Health</Button>
                     </Card.Body>
                   </Card>
                 </Col>
               })
             }
           </Row>
-          <div className="d-grid gap-2">
-            <Button variant="primary" size="lg" className="m-5">
-              Go to posts
-            </Button>
-          </div>
         </Container>
       </div>
-      <div className='home-about'>
+      <div className='home-about mt-4'>
         <h2>About Me</h2>
         <div className='about'>
           <img src={me} alt="About me" />
