@@ -8,6 +8,8 @@ import social from '../../images/social.png'
 import me from '../../images/profile.jpg'
 // react-bootstrap components
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
+// links to other pages
+import { Link } from 'react-router-dom'
 
 function Home() {
   const pillars = [
@@ -49,7 +51,9 @@ function Home() {
                     <Card.Body>
                       <Card.Title className="pillars-title">{p.title}</Card.Title>
                       <Card.Text className="pillars-text">{p.text}</Card.Text>
-                      <Button href="#">Go to {p.title} Health</Button>
+                      <Link to={p.title}>
+                        <Button>Go to {p.title} Health</Button>
+                      </Link>
                     </Card.Body>
                   </Card>
                 </Col>
