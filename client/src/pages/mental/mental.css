@@ -1,12 +1,29 @@
 .mental {
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 h1 {
     font-family: 'Kanit', sans-serif;
-    font-size: 50px;
-    margin: 40px;
+    font-size: 60px;
+    margin: 40px auto;
+}
+
+h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 40px;
+}
+
+p {
+    font-size: 19px;
+}
+
+.explained,
+.awareness {
+    margin-top: 30px;
+    width: 70vw;
 }
