@@ -20,6 +20,12 @@ function Mental() {
                 <p>Experiencing certain feelings or behaviors can be an early warning sign of a problem. These include irregular sleep, low energy, numbness, unexplained aches, helpless or hopeless, confused, forgetful, on edge, angry, worried, scared, fighting with loved ones, mood swings, persistent thoughts and memories, hearing voices, thinking of harming yourself or others, inability to perform daily tasks and <a href="https://www.nami.org/About-Mental-Illness/Warning-Signs-and-Symptoms" target="_blank" rel="noreferrer">more</a>.</p>
                 <p>Positive mental health allows people to cope with the stresses of life, improve their daily mood, think clearer, work productively, boost their self-esteem, build deeper relationships and make meaningful contributions to their communities which ultimately leads to a greater sense of purpose and potential.</p>
             </div>
+            <div className="experience">
+                <h2>Experience</h2>
+                <p>Meditation has really helped me manage my thoughts and emotions better, resulting in better mental health over time. At first, meditation felt hard and sometimes even a waste of time. However, I began to realize it is uncomfortable because humans in general are not used to taking a break to focus on being fully present. These days meditation is like an escape for me, where I forget about the world and focus on myself.</p>
+                <p>Many of us have meditated without even realizing it. If you’ve ever sat in silence and enjoyed a moment to yourself, you’ve meditated. If you’ve ever stopped to focus on your breath, you’ve meditated. There are many types of meditation, and many misconceptions that go along with them. At the core, meditation is turning your attention away from the mental noise that comes from everyday life. This could mean focusing on your breath, mentally repeating a phrase, or simply just focusing your thoughts on the present moment. </p>
+                <p>While the practice may seem insignificant, the results can be incredibly significant. Studies suggest that mindful meditation can help reduce anxiety, depression and psychological pain. Plus, mindful meditation has also been known to be beneficial for general mood, sleep, cognition and more.</p>
+            </div>
         </div>
     )
 }

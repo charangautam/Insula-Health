@@ -23,7 +23,8 @@ p {
 }
 
 .explained,
-.awareness {
+.awareness,
+.experience {
     margin-top: 30px;
     width: 70vw;
 }
